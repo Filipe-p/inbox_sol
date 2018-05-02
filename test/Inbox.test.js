@@ -17,7 +17,8 @@ let accounts
 let inbox
 
 //inputs
-let initialMessage = 'Hi there!'
+let initialDefaultMessage = 'Hi there!'
+let messageToSet = 'Good bye!'
 
 beforeEach(async () => { 
 	// ganache has unclocked account created
@@ -26,7 +27,7 @@ beforeEach(async () => {
 
 	//use one of the accounts to deploy the Contract
 	inbox = await new web3.eth.Contract(JSON.parse(interface))
-	.deploy({ data: bytecode, arguments:[initialMessage]})
+	.deploy({ data: bytecode, arguments:[initialDefaultMessage]})
 	.send({ from: accounts[0], gas: '1000000'});
 });
 
@@ -36,7 +37,12 @@ describe('Inbox', () => {
 	});
 	it("has a default message", async () =>{
 		const message = await inbox.methods.message().call(); //call if you want to make a different call like a transaction and send gas
-		assert.equal(message, initialMessage);
+		assert.equal(message, initialDefaultMessage);
+	});
+	it('can change a message', async () => {
+		await inbox.methods.setMesssage(messageToSet).send( { from: accounts[0] });
+		const message = await inbox.methods.message().call();
+		assert.equal(message, messageToSet);
 	});
 });
 
