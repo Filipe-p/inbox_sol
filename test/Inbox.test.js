@@ -1,7 +1,10 @@
 
 //MOCHA
-// it - Rrun a testes and makes asserctions
-// describe - Groups together 'it functions'
+// it - Rrun a testes and makes asserctions it(descriptive_message, a_block{})
+// describe - Groups together 'it functions' 
+//   describe(descriptive_message, a_block{
+//	    it(descriptive_message, a_block{})
+//   })
 // beforeEach - iniciates something before testes
 
 const assert = require('assert');
