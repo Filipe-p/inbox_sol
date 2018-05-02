@@ -1,23 +1,30 @@
 
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require("truffle-hdwallet-provider");
 const Web3 = require('web3');
 const {interface, bytecode } = require('./compile');
 
 console.log(interface);
 console.log(bytecode);
+console.log('A........................');
+console.log(HDWalletProvider);
 
-const provider = new HDWalletProvider(
-	'miracle vanish dice sight dose reveal curve vault three fringe nurse buzz',
-	'https://rinkeby.infura.io/dRMvlwMXOYCMdB4fOJeP'
-);
+//Wallet mnemonic + network
+const mnemonic = "miracle vanish dice sight dose reveal curve vault three fringe nurse buzz";
+const network = "https://rinkeby.infura.io/dRMvlwMXOYCMdB4fOJeP"
+console.log('1........................');
+console.log(mnemonic);
+console.log(network);
+console.log('2........................');
+const provider = new HDWalletProvider( mnemonic, network);
 
-console.log('........................');
+console.log('3........................');
 console.log(provider);
-console.log('........................');
+console.log('4........................');
 
 const web3 = new Web3(provider);
 
 const deploy = async () => {
+	console.log('inside deploy')
 	const accounts = await web3.eth.getAccounts();
 
 	console.log('attempting to deploy from account', accounts[0]);
