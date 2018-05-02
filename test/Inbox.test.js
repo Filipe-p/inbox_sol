@@ -7,24 +7,35 @@
 const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3'); //constructrer 
-
 const web3 = new Web3(ganache.provider()); // connecting to network
-
+const {interface, bytecode} = require('../compile');
 
 let accounts
+let inbox
+
+//inputs
+let initialMessage = 'Hi there!'
 
 beforeEach(async () => { 
 	// ganache has unclocked account created
 	// use web3 library to get a list of all accounts
 	accounts = await web3.eth.getAccounts();
+
+	//use one of the accounts to deploy the Contract
+	inbox = await new web3.eth.Contract(JSON.parse(interface))
+	.deploy({ data: bytecode, arguments:[initialMessage]})
+	.send({ from: accounts[0], gas: '1000000'});
 });
 
-describe('Inbox - Web3 and  ganache', () => {
+describe('Inbox', () => {
 	it('deploys a contract', () => {
-		console.log(accounts)
+		assert.ok(inbox.options.address); //checks if a defined value
+	});
+	it("has a default message", async () =>{
+		const message = await inbox.methods.message().call(); //call if you want to make a different call like a transaction and send gas
+		assert.equal(message, initialMessage);
 	});
 });
-
 
 
 
@@ -70,21 +81,3 @@ describe('Inbox - Web3 and  ganache', () => {
 //1) deploy new contract to our genache local network - common starter logic - beforeEach
 //2.a) make changes to contract or use the contract
 //2.b) assert if it makes the changes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
