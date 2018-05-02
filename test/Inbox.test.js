@@ -19,16 +19,47 @@ class Car {
 	}
 }
 
-//now lest use actual mocha and assert libraries
+//Refactor code to use beforeEach
+
+let car; //car is undefined
+
+beforeEach(() => {
+	car = new Car(); // car becomes a new Car object
+});
+
+// //now lest use actual mocha and assert libraries
 
 describe('Car class methods', () => {
 	it('Can park, returning string stopped', () => {
-		const car = new Car;
+		// const car = new Car;
 		assert.equal(car.park(), 'stopped');
 	});
 
 	it('Can drive, returning string vroom', () => {
-		const car = new Car;
+		//const car = new Car;
 		assert.equal(car.drive(), 'vroom');
 	})
 });
+
+
+
+// testing a solidity contract
+
+
+// deploy new contract - common starter logic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
