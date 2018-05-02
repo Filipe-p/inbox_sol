@@ -10,17 +10,19 @@ const Web3 = require('web3'); //constructrer
 
 const web3 = new Web3(ganache.provider()); // connecting to network
 
-beforeEach(() => { 
+
+let accounts
+
+beforeEach(async () => { 
 	// ganache has unclocked account created
 	// use web3 library to get a list of all accounts
-	web3.eth.getAccounts()
-	.then(examples1 => {
-		console.log(examples1);
-	});
+	accounts = await web3.eth.getAccounts();
 });
 
 describe('Inbox - Web3 and  ganache', () => {
-	it('deploys a contract', () => {});
+	it('deploys a contract', () => {
+		console.log(accounts)
+	});
 });
 
 
