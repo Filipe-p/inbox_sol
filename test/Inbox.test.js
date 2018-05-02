@@ -19,7 +19,7 @@ beforeEach(() => {
 	});
 });
 
-describe('Web3 and ganache', () => {
+describe('Inbox - Web3 and  ganache', () => {
 	it('deploys a contract', () => {});
 });
 
